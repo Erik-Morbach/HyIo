@@ -1,2 +1,2 @@
 # HyperIo
-Python3 Io manager
+IO abstraction for raspberryPi
