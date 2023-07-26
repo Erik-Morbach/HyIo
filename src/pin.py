@@ -22,41 +22,23 @@ class Pin:
     def set(self, value):
         pass
 
-def InputPin(Pin):
+class InputPin(Pin):
+    def __init__(self, id, debouncer, device) -> None:
+        super().__init__(id, debouncer, device)
+
     def update(self, currentTime):
         self.debouncer.updateValueIfNeed(currentTime, self._updatePinOnDeviceFunction)
         self.debouncer.addToBufferIfNeed(currentTime, self._getFromDeviceFunction)
 
-def OutputPin(Pin):
+class OutputPin(Pin):
+    def __init__(self, id, debouncer, device) -> None:
+        super().__init__(id, debouncer, device)
+        self._lastOutValue = 0
+
     def update(self, currentTime):
         self.debouncer.addToBufferIfNeed(currentTime, self._lastOutValue)
         self.debouncer.updateValueIfNeed(currentTime, self._setPinOnDeviceFunction)
 
     def set(self, value):
         self._lastOutValue = value
-
-
-#class Pin:
-#    def __init__(self, id, key, period, halDevice) -> None:
-#        self.id = id
-#        self.key = key
-#        self.hal = halDevice
-#        self.mtx = threading.Lock()
-#        self.period = (int)(period*10**9)
-#        self.lastUpdate = 0
-
-#    def _readPin(self):
-#        value = self.hal.read(self.key)
-
-#    def update(self, currentTime):
-#        if currentTime - self.lastUpdate < self.period:
-#            return
-#        self.lastUpdate = currentTime
-#        self._readPin()
-
-#    def get(self):
-#        return 1 if self.currentSum>=self.blockSize else 0
-
-#    def set(self, value):
-#        self.hal.write(self.key, value)
 

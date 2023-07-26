@@ -34,10 +34,4 @@ class IoManager:
         self.threadObj.join()
         self.threadObj = None
 
-    def startSubProcess(self):
-        pass
-
-    def stopSubProcess(self):
-        pass
-
 

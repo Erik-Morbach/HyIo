@@ -2,6 +2,9 @@ class Device:
     def __init__(self) -> None:
         pass
 
+    def setup(self, id, mode):
+        pass
+
     def update(self, id):
         pass
 
@@ -10,28 +13,3 @@ class Device:
 
     def get(self, id):
         pass
-
-
-class I2CDevice(Device):
-    def __init__(self) -> None:
-        super().__init__()
-
-    def update(self, id):
-        return super().update(id)
-
-    def set(self, id, value):
-        return super().set(id, value)
-
-    def get(self, id):
-        return super().get(id)
-
-
-class GPIODevice(Device):
-    def __init__(self) -> None:
-        super().__init__()
-    def update(self, id):
-        return super().update(id)
-    def set(self, id, value):
-        return super().set(id, value)
-    def get(self, id):
-        return super().get(id)
