@@ -43,6 +43,9 @@ class OutputPin(Pin):
         super().__init__(id, debouncer, device)
         self._lastOutValue = 0
 
+    def setup(self):
+        return super().setup(device.OUTPUT)
+
     def update(self, currentTime):
         self.debouncer.addToBufferIfNeed(currentTime, self._lastOutValue)
         self.debouncer.updateValueIfNeed(currentTime, self._setPinOnDeviceFunction)
