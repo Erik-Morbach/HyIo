@@ -8,15 +8,10 @@ class GPIODevice(device.Device):
         wp.wiringPiSetupGpio()
 
     def update(self, id):
-        return super().update(id)
+        if self.pins[id] == device.INPUT: self.data[id] = wp.digitalRead(id)
+        else: wp.digitalWrite(id, self.data[id])
 
     def setup(self, id, mode):
-        if mode == "output": wp.pinMode(id, 1)
-        else: wp.pinMode(id, 0)
-
-    def set(self, id, value):
-        wp.digitalWrite(id, value)
-
-    def get(self, id):
-        return wp.digitalRead(id)
-
+        if mode == device.INPUT: wp.pinMode(id, 0)
+        else: wp.pinMode(id, 1)
+        return super().setup(id, mode)

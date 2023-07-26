@@ -1,15 +1,23 @@
+INPUT = "input"
+OUTPUT = "output"
+NONE = "none"
+
+
 class Device:
     def __init__(self) -> None:
-        pass
+        self.data = {}
+        self.pins = {}
 
     def setup(self, id, mode):
-        pass
+        self.pins[id] = mode
+        self.data[id] = 0
 
-    def update(self, id):
+    def update(self, id): # set self.data[id] to hardware
         pass
 
     def set(self, id, value):
-        pass
+        if self.pins[id] == OUTPUT:
+            self.data[id] = value
 
     def get(self, id):
-        pass
+        return self.data[id]

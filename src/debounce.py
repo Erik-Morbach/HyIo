@@ -29,11 +29,14 @@ class Debouncer:
 
     def updateValueIfNeed(self, currentTime, func):
         if currentTime - self.lastUpdateTime < self.updatePeriod:
-            return
+            return False
         func(self.get())
         self.lastUpdateTime = currentTime
+        return True
 
     def addToBufferIfNeed(self, currentTime, getValueFunc):
         if currentTime - self.lastAddTime < self.addPeriod:
-            return
+            return False
         self.block.add(getValueFunc())
+        self.lastAddTime = currentTime
+        return True

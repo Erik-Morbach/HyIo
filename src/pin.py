@@ -1,8 +1,13 @@
+import device
+
 class Pin:
     def __init__(self, id, debouncer, device) -> None:
         self.id = id
         self.debouncer = debouncer
         self.device = device
+
+    def setup(self, mode=device.NONE):
+        self.device.setup(self.id, mode)
 
     def _updatePinOnDeviceFunction(self, value):
         self.device.update(self.id)
@@ -25,6 +30,9 @@ class Pin:
 class InputPin(Pin):
     def __init__(self, id, debouncer, device) -> None:
         super().__init__(id, debouncer, device)
+
+    def setup(self):
+        return super().setup(device.INPUT)
 
     def update(self, currentTime):
         self.debouncer.updateValueIfNeed(currentTime, self._updatePinOnDeviceFunction)
