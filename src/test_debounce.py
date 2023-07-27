@@ -22,10 +22,10 @@ def test_debouncer():
         assert not debouncer.updateValueIfNeed(curTime, functor)
 
     for curTime in range(0,10):
-        assert not debouncer.addToBufferIfNeed(curTime, lambda : curTime)
-    assert debouncer.addToBufferIfNeed(10, lambda : 10)
+        assert not debouncer.addToBufferIfNeed(curTime, curTime)
+    assert debouncer.addToBufferIfNeed(10, 10)
     assert debouncer.get() == 10
     for curTime in range(11,20):
-        assert not debouncer.addToBufferIfNeed(curTime, lambda : curTime)
+        assert not debouncer.addToBufferIfNeed(curTime, curTime)
         assert debouncer.get() == 10
 

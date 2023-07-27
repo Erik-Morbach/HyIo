@@ -5,21 +5,26 @@ class Pin:
         self.id = id
         self.debouncer = debouncer
         self.device = device
+        self._oldValue = 0
 
     def setup(self, mode=device.NONE):
         self.device.setup(self.id, mode)
 
-    def _updatePinOnDeviceFunction(self, value):
+    def _updatePinOnDeviceFunction(self):
         self.device.update(self.id)
 
-    def _setPinOnDeviceFunction(self, value):
-        self.device.set(self.id, value)
+    def _setPinOnDeviceFunction(self):
+        self.device.set(self.id, self.get())
 
     def _getFromDeviceFunction(self):
         return self.device.get(self.id)
 
     def update(self, currentTime):
-        pass
+        currentValue = self.debouncer.get()
+        if currentValue == self._oldValue:
+            return False
+        self._oldValue = currentValue
+        return True
 
     def get(self):
         return self.debouncer.get()
@@ -35,8 +40,9 @@ class InputPin(Pin):
         return super().setup(device.INPUT)
 
     def update(self, currentTime):
-        self.debouncer.updateValueIfNeed(currentTime, self._updatePinOnDeviceFunction)
-        self.debouncer.addToBufferIfNeed(currentTime, self._getFromDeviceFunction)
+        self.debouncer.updateValueIfNeed(currentTime, self._updatePinOnDeviceFunction) # function is executed inside
+        self.debouncer.addToBufferIfNeed(currentTime, self._getFromDeviceFunction()) # get executed here
+        return super().update(currentTime)
 
 class OutputPin(Pin):
     def __init__(self, id, debouncer, device) -> None:
@@ -48,7 +54,8 @@ class OutputPin(Pin):
 
     def update(self, currentTime):
         self.debouncer.addToBufferIfNeed(currentTime, self._lastOutValue)
-        self.debouncer.updateValueIfNeed(currentTime, self._setPinOnDeviceFunction)
+        self.debouncer.updateValueIfNeed(currentTime, self._setPinOnDeviceFunction) # function is executed inside
+        return super().update(currentTime)
 
     def set(self, value):
         self._lastOutValue = value
