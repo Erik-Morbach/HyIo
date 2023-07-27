@@ -18,6 +18,8 @@ def test_manager():
     def notify_me(value):
         global currentValue
         currentValue = value
+        if value > 10:
+            currentValue = (15/0)
 
     manager.registerPin(out,notify_me)
 
@@ -29,6 +31,12 @@ def test_manager():
     out.set(0)
     time.sleep(0.02)
     assert currentValue == 0
+
+    assert manager.lastError == ""
+
+    out.set(11)
+    time.sleep(0.02)
+    assert len(manager.lastError) > 0
 
     manager.stopThread()
 
