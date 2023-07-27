@@ -1,3 +1,5 @@
+
+
 class Block:
     def __init__(self, blockSize) -> None:
         self.blockSize = blockSize
@@ -13,6 +15,7 @@ class Block:
 
     def get(self):
         return self.currentSum/self.blockSize
+
 
 class Debouncer:
     def __init__(self, updatePeriod, addPeriod, blockSize) -> None:

@@ -12,7 +12,7 @@ class Device:
         self.pins[id] = mode
         self.data[id] = 0
 
-    def update(self, id): # set self.data[id] to hardware
+    def update(self, id):  # set self.data[id] to hardware
         pass
 
     def set(self, id, value):

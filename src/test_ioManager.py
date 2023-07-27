@@ -9,19 +9,20 @@ def test_manager():
     manager = ioManager.IoManager(0.01)
 
     dev = device.Device()
-    
-    out = pin.OutputPin(1, debounce.Debouncer(0,0,1), dev)
+
+    out = pin.OutputPin(1, debounce.Debouncer(0, 0, 1), dev)
     out.setup()
 
     global currentValue
     currentValue = 0
+
     def notify_me(value):
         global currentValue
         currentValue = value
         if value > 10:
             currentValue = (15/0)
 
-    manager.registerPin(out,notify_me)
+    manager.registerPin(out, notify_me)
 
     manager.startThread()
     time.sleep(0.02)
@@ -39,4 +40,3 @@ def test_manager():
     assert len(manager.lastError) > 0
 
     manager.stopThread()
-

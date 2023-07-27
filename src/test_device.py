@@ -9,14 +9,11 @@ def test_device():
     dev.setup(3, device.INPUT)
     dev.setup(4, device.OUTPUT)
 
-    for inp in [1,3]:
+    for inp in [1, 3]:
         assert dev.get(inp) == 0
         dev.set(inp, 1)
         assert dev.get(inp) == 0
-    for out in [2,4]:
+    for out in [2, 4]:
         assert dev.get(out) == 0
         dev.set(out, 1)
         assert dev.get(out) == 1
-
-
-

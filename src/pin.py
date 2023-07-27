@@ -1,5 +1,6 @@
 import device
 
+
 class Pin:
     def __init__(self, id, debouncer, device) -> None:
         self.id = id
@@ -32,6 +33,7 @@ class Pin:
     def set(self, value):
         pass
 
+
 class InputPin(Pin):
     def __init__(self, id, debouncer, device) -> None:
         super().__init__(id, debouncer, device)
@@ -40,9 +42,10 @@ class InputPin(Pin):
         return super().setup(device.INPUT)
 
     def update(self, currentTime):
-        self.debouncer.updateValueIfNeed(currentTime, self._updatePinOnDeviceFunction) # function is executed inside
-        self.debouncer.addToBufferIfNeed(currentTime, self._getFromDeviceFunction()) # get executed here
+        self.debouncer.updateValueIfNeed(currentTime, self._updatePinOnDeviceFunction)  # function is executed inside
+        self.debouncer.addToBufferIfNeed(currentTime, self._getFromDeviceFunction())  # get executed here
         return super().update(currentTime)
+
 
 class OutputPin(Pin):
     def __init__(self, id, debouncer, device) -> None:
@@ -54,9 +57,8 @@ class OutputPin(Pin):
 
     def update(self, currentTime):
         self.debouncer.addToBufferIfNeed(currentTime, self._lastOutValue)
-        self.debouncer.updateValueIfNeed(currentTime, self._setPinOnDeviceFunction) # function is executed inside
+        self.debouncer.updateValueIfNeed(currentTime, self._setPinOnDeviceFunction)  # function is executed inside
         return super().update(currentTime)
 
     def set(self, value):
         self._lastOutValue = value
-

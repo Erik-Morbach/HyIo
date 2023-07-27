@@ -4,6 +4,7 @@ import queue
 import functools
 import traceback
 
+
 class IoManager:
     def __init__(self, period) -> None:
         self.period = period
@@ -34,18 +35,18 @@ class IoManager:
 
     def _callbackThreadFunction(self):
         while self.threadActive:
-            if self.queue.empty(): 
+            if self.queue.empty():
                 time.sleep(self.period)
                 continue
             current = self.queue.get(block=True)
             try:
                 current()
-            except:
+            except BaseException:
                 self.lastError = traceback.format_exc()
 
-
     def startThread(self):
-        if self.threadActive: return
+        if self.threadActive:
+            return
         self.threadActive = True
         self.callbackThreadObj = threading.Thread(target=self._callbackThreadFunction)
         self.updateThreadObj = threading.Thread(target=self._updateThreadFunction)
@@ -65,5 +66,3 @@ class IoManager:
             self.callbackThreadObj.join()
 
         self.updateThreadObj = self.callbackThreadObj = None
-
-

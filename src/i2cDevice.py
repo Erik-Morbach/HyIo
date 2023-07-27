@@ -23,4 +23,3 @@ class I2CDevice(device.Device):
             self.data[id] = self._read_pin(id)
         else:
             self._write_pin(id, self.data[id])
-

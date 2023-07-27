@@ -2,13 +2,14 @@ import pin
 import device
 import debounce
 
+
 def test_pin():
     dev = device.Device()
-    
-    inp = pin.InputPin(1, debounce.Debouncer(0,0,1), dev)
+
+    inp = pin.InputPin(1, debounce.Debouncer(0, 0, 1), dev)
     inp.setup()
 
-    out = pin.OutputPin(2, debounce.Debouncer(0,0,1), dev)
+    out = pin.OutputPin(2, debounce.Debouncer(0, 0, 1), dev)
     out.setup()
 
     inp.update(1)
@@ -22,5 +23,3 @@ def test_pin():
     out.set(1)
     out.update(2)
     assert out.get() == 1
-
-
