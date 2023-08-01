@@ -21,7 +21,7 @@ class Pin:
         return self.device.get(self.id)
 
     def update(self, currentTime):
-        currentValue = self.debouncer.get()
+        currentValue = self.get()
         if currentValue == self._oldValue:
             return False
         self._oldValue = currentValue

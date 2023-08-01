@@ -6,7 +6,7 @@ import time
 
 
 def test_manager():
-    manager = ioManager.IoManager(0.01)
+    manager = ioManager.IoManager(10)
 
     dev = device.Device()
 

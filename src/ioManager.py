@@ -16,6 +16,14 @@ class IoManager:
         self.callbackThreadObj = None
         self.threadActive = False
         self.lastError = ""
+        self.locals = None
+        self.globals = None
+
+    def setLocals(self, local):
+        self.locals = local
+
+    def setGlobals(self, globa):
+        self.globals = globa
 
     def registerPin(self, pin, callback):
         self.pins += [pin]
@@ -25,22 +33,22 @@ class IoManager:
         currentTime = time.perf_counter_ns()
         for i in range(len(self.pins)):
             if self.pins[i].update(currentTime):
-                func = functools.partial(self.callbacks[i], self.pins[i].get())
-                self.queue.put(func, block=True)
+                data = (self.callbacks[i], self.pins[i].get())
+                self.queue.put(data, block=True)
 
     def _updateThreadFunction(self):
         while self.threadActive:
             self.updatePins()
-            time.sleep(self.period)
+            time.sleep(self.period/1000)
 
     def _callbackThreadFunction(self):
         while self.threadActive:
             if self.queue.empty():
-                time.sleep(self.period)
+                time.sleep(self.period/1000)
                 continue
-            current = self.queue.get(block=True)
+            func, args = self.queue.get(block=True)
             try:
-                current()
+                func(args)
             except BaseException:
                 self.lastError = traceback.format_exc()
 
