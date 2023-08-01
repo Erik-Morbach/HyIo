@@ -1,4 +1,4 @@
-# HyperIo
+# HyIo
 IO abstraction for raspberryPi
 
 

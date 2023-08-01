@@ -1,14 +1,14 @@
 from distutils.core import setup
 setup(
-  name = 'HyperIo',
-  packages = ['HyperIo'],
+  name = 'HyIo',
+  packages = ['HyIo'],
   version = '0.2.1',
   license='MIT',
   description = 'Abstraction to Io device on raspberry pi',
   author = 'Erik Cruz Morbach',
   author_email = 'morbacherik@gmail.com',
-  url = 'https://github.com/Erik-Morbach/HyperIo',
-  download_url = 'https://github.com/Erik-Morbach/HyperIo/archive/refs/tags/V0.2.1.tar.gz',
+  url = 'https://github.com/Erik-Morbach/HyIo',
+  download_url = 'https://github.com/Erik-Morbach/HyIo/archive/refs/tags/V0.2.1.tar.gz',
   keywords = ['io', 'raspberry', 'abstraction'],
   install_requires=[
           'wiringpi',
