@@ -4,7 +4,7 @@ import device
 class I2CDevice(device.Device):
     def __init__(self, address) -> None:
         super().__init__()
-        self.bus = smbus2.SMBusWrapper(1)
+        self.bus = smbus2.SMBus(1)
         self.address = address
 
     def _read_pin(self, id):

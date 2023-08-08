@@ -27,6 +27,13 @@ class Debouncer:
 
         self.block = Block(blockSize)
 
+    def __eq__(self, deb):
+        if self.updatePeriod != deb.updatePeriod:
+            return False
+        if self.addPeriod != deb.addPeriod:
+            return False
+        return self.block.blockSize == deb.block.blockSize
+
     def get(self):
         return self.block.get()
 
