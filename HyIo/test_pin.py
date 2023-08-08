@@ -1,15 +1,15 @@
-import HyIo.pin
-import HyIo.device
-import HyIo.debounce
+from . import pin
+from . import device
+from . import debounce
 
 
 def test_pin():
-    dev = HyIo.device.Device()
+    dev = device.Device()
 
-    inp = HyIo.pin.InputPin(1, HyIo.debounce.Debouncer(0, 0, 1), dev)
+    inp = pin.InputPin(1, debounce.Debouncer(0, 0, 1), dev)
     inp.setup()
 
-    out = HyIo.pin.OutputPin(2, HyIo.debounce.Debouncer(0, 0, 1), dev)
+    out = pin.OutputPin(2, debounce.Debouncer(0, 0, 1), dev)
     out.setup()
 
     inp.update(1)

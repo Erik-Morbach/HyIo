@@ -1,9 +1,9 @@
-import HyIo.debounce
+from . import debounce
 
 
 def test_block():
     for window in range(1, 100):
-        block = HyIo.debounce.Block(window)
+        block = debounce.Block(window)
         for i in range(1, 1000):
             block.add(i)
 
@@ -16,7 +16,7 @@ def test_block():
 def test_debouncer():
     def functor(*args):
         pass
-    debouncer = HyIo.debounce.Debouncer(10, 10, 1)
+    debouncer = debounce.Debouncer(10, 10, 1)
 
     for curTime in range(0, 10):
         assert not debouncer.updateValueIfNeed(curTime, functor)

@@ -1,5 +1,5 @@
-from HyIo.device import Device
-from HyIo.parser import Parser
+from .device import Device
+from .parser import Parser
 
 
 def test_device():  # TODO: test i2c and gpio devices
