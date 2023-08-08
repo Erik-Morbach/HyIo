@@ -1,16 +1,16 @@
-import ioManager
-import device
-import pin
-import debounce
+import HyIo.ioManager
+import HyIo.device
+import HyIo.pin
+import HyIo.debounce
 import time
 
 
 def test_manager():
-    manager = ioManager.IoManager(10)
+    manager = HyIo.ioManager.IoManager(10)
 
-    dev = device.Device()
+    dev = HyIo.device.Device()
 
-    out = pin.OutputPin(1, debounce.Debouncer(0, 0, 1), dev)
+    out = HyIo.pin.OutputPin(1, HyIo.debounce.Debouncer(0, 0, 1), dev)
     out.setup()
 
     global currentValue

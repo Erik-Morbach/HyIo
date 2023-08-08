@@ -1,13 +1,13 @@
-import device
+import HyIo.device
 
 
 def test_device():
-    dev = device.Device()
+    dev = HyIo.device.Device()
 
-    dev.setup(1, device.INPUT)
-    dev.setup(2, device.OUTPUT)
-    dev.setup(3, device.INPUT)
-    dev.setup(4, device.OUTPUT)
+    dev.setup(1, HyIo.device.INPUT)
+    dev.setup(2, HyIo.device.OUTPUT)
+    dev.setup(3, HyIo.device.INPUT)
+    dev.setup(4, HyIo.device.OUTPUT)
 
     for inp in [1, 3]:
         assert dev.get(inp) == 0
