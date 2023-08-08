@@ -1,4 +1,4 @@
-import device
+from . import device
 
 import wiringpi as wp
 

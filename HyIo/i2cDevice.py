@@ -1,5 +1,5 @@
 import smbus2
-import device
+from . import device
 
 class I2CDevice(device.Device):
     def __init__(self, address) -> None:
