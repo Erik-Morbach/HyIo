@@ -73,6 +73,6 @@ class Parser:
 
         # TODO: Binary type, it groups some input pins or output pins and give the response on decimal form, but use the pins to binary it
         if mode == 'input': return pin.InputPin(id, debouncer, dev)
-        if mode == 'output': return pin.OutputPin(id, debouncer, dev)
+        elif mode == 'output': return pin.OutputPin(id, debouncer, dev)
         return pin.Pin(id, debouncer, dev)
 

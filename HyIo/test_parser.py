@@ -13,8 +13,11 @@ def test_pin():
     parser = Parser()
     inp = parser.getPin("input-10,0-0-1,sim")
     out = parser.getPin("output-11,0-0-1,sim")
-
+    #group-vec(input-10,0-0-1,sim|input-11,0-0-1,sim)"
+    #group-bin(input-10,0-0-1,sim|input-11,0-0-1,sim)"
+    #group-bin-gray(input-10,0-0-1,sim|input-11,0-0-1,sim)"
 #    assert isinstance(inp, pin.InputPin) # TODO:Resolve this
+
 #    assert isinstance(out, pin.OutputPin)
 
     assert inp.id == 10
